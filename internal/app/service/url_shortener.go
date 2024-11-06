@@ -16,6 +16,7 @@ func NewURLShortener(storage map[string]entity.StorageEntity) *SimpleURLShortene
 }
 
 func (us SimpleURLShortener) Shorten(url string) (string, error) {
+	fmt.Println("url = ", url)
 	if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
 		return "", fmt.Errorf("url должен начинаться на http:// или https://")
 	}
