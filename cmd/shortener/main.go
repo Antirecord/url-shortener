@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	urlShortener := service.NewUrlShortener(map[string]entity.StorageEntity{})
+	urlShortener := service.NewURLShortener(map[string]entity.StorageEntity{})
 	handler := handlers.NewHandler(urlShortener)
 
 	mux := http.NewServeMux()
