@@ -23,7 +23,7 @@ func run(mux *http.ServeMux) error {
 	return http.ListenAndServe(":8080", mux)
 }
 
-var urlShortner = service.NewUrlShortener{Storage: make(map[string]entity.StorageEntity)}
+var urlShortner = service.NewURLShortener{Storage: make(map[string]entity.StorageEntity)}
 
 func handler(w http.ResponseWriter, r *http.Request) {
 
@@ -31,7 +31,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	case http.MethodGet:
 		id := r.URL.Path[1:]
-		res, err := urlShortner.GetBaseUrl(id)
+		res, err := urlShortner.GetBaseURL(id)
 		if err != nil {
 			http.Error(w, "Error while getting baseUrl, url not found", http.StatusNotFound)
 		}

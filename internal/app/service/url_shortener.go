@@ -7,33 +7,33 @@ import (
 	"github.com/antirecord/url-shortener/internal/app/entity"
 )
 
-type NewUrlShortener struct {
+type NewURLShortener struct {
 	Storage map[string]entity.StorageEntity
 }
 
-func (us NewUrlShortener) Shorten(url string) (string, error) {
-	if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
+func (us NewURLShortener) Shorten(URL string) (string, error) {
+	if !strings.HasPrefix(URL, "http://") && !strings.HasPrefix(URL, "https://") {
 		return "", fmt.Errorf("url должен начинаться на http:// или https://")
 	}
 
-	hash := GenerateHash(url)
+	hash := GenerateHash(URL)
 	fmt.Println("hash === ", hash)
 	newUrl := mergeHash(hash)
 	fmt.Println("newUrl ==== ", newUrl)
 	entity := entity.StorageEntity{
-		BaseUrl:    url,
-		ShortedUrl: newUrl,
+		BaseURL:    URL,
+		ShortedURL: newUrl,
 	}
 
 	us.Storage[hash] = entity
 	return newUrl, nil
 }
 
-func (us NewUrlShortener) GetBaseUrl(id string) (string, error) {
+func (us NewURLShortener) GetBaseURL(id string) (string, error) {
 	baseUrl, ok := us.Storage[id]
 
 	if ok {
-		return baseUrl.BaseUrl, nil
+		return baseUrl.BaseURL, nil
 	}
 	return "", fmt.Errorf("url с таким id не найден")
 }
