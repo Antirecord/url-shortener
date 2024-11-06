@@ -11,7 +11,7 @@ type SimpleURLShortener struct {
 	storage map[string]entity.StorageEntity
 }
 
-func NewUrlShortener(storage map[string]entity.StorageEntity) *SimpleURLShortener {
+func NewURLShortener(storage map[string]entity.StorageEntity) *SimpleURLShortener {
 	return &SimpleURLShortener{storage: storage}
 }
 

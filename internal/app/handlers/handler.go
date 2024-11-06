@@ -9,13 +9,13 @@ import (
 )
 
 type Handler struct {
-	UrlShortener service.URLShortener
+	URLShortener service.URLShortener
 }
 type Server struct {
 }
 
 func NewHandler(urlshortener service.URLShortener) *Handler {
-	return &Handler{UrlShortener: urlshortener}
+	return &Handler{URLShortener: urlshortener}
 }
 func (h *Handler) Handle(w http.ResponseWriter, r *http.Request) {
 
@@ -23,7 +23,7 @@ func (h *Handler) Handle(w http.ResponseWriter, r *http.Request) {
 
 	case http.MethodGet:
 		id := r.URL.Path[1:]
-		res, err := h.UrlShortener.GetBaseURL(id)
+		res, err := h.URLShortener.GetBaseURL(id)
 		if err != nil {
 			http.Error(w, "Error while getting baseUrl, url not found", http.StatusNotFound)
 			return
@@ -43,7 +43,7 @@ func (h *Handler) Handle(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		res, err := h.UrlShortener.Shorten(string(body))
+		res, err := h.URLShortener.Shorten(string(body))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error while shorting body: %s", err.Error()), http.StatusBadRequest)
 			return

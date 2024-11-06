@@ -44,7 +44,7 @@ func TestHandlerGet(t *testing.T) {
 	handler := newTestHandler()
 	url := "https://ya.ru"
 
-	handler.UrlShortener.(*mockURLShortener).storage["short-id"] = entity.StorageEntity{BaseURL: url}
+	handler.URLShortener.(*mockURLShortener).storage["short-id"] = entity.StorageEntity{BaseURL: url}
 	req := httptest.NewRequest(http.MethodGet, "/short-id", nil)
 	w := httptest.NewRecorder()
 	handler.Handle(w, req)
