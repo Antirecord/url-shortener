@@ -1,6 +1,6 @@
 package service
 
-type UrlShortener interface {
+type URLShortener interface {
 	Shorten(data string) (string, error)
-	GetBaseUrl(id string) (string, error)
+	GetBaseURL(id string) (string, error)
 }

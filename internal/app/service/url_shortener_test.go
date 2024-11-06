@@ -7,14 +7,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSimpleUrlShortener_Shorten(t *testing.T) {
-	us := SimpleUrlShortener{storage: map[string]entity.StorageEntity{}}
+func TestSimpleURLShortener_Shorten(t *testing.T) {
+	us := SimpleURLShortener{storage: map[string]entity.StorageEntity{}}
 	type args struct {
 		url string
 	}
 	tests := []struct {
 		name    string
-		us      SimpleUrlShortener
+		us      SimpleURLShortener
 		args    args
 		val     string
 		wantErr bool
@@ -52,13 +52,13 @@ func TestSimpleUrlShortener_Shorten(t *testing.T) {
 	}
 }
 
-func TestSimpleUrlShortener_GetBaseUrl(t *testing.T) {
+func TestSimpleUrlShortener_GetBaseURL(t *testing.T) {
 	type args struct {
 		id string
 	}
 	tests := []struct {
 		name    string
-		us      SimpleUrlShortener
+		us      SimpleURLShortener
 		args    args
 		want    string
 		wantErr bool
@@ -67,7 +67,7 @@ func TestSimpleUrlShortener_GetBaseUrl(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.us.GetBaseUrl(tt.args.id)
+			got, err := tt.us.GetBaseURL(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("SimpleUrlShortener.GetBaseUrl() error = %v, wantErr %v", err, tt.wantErr)
 				return

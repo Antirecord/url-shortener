@@ -1,6 +1,6 @@
 package entity
 
 type StorageEntity struct {
-	BaseUrl    string
-	ShortedUrl string
+	BaseURL    string
+	ShortedURL string
 }

@@ -13,38 +13,38 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-type mockUrlShortener struct {
+type mockURLShortener struct {
 	storage map[string]entity.StorageEntity
 }
 
-func (m *mockUrlShortener) GetBaseUrl(id string) (string, error) {
+func (m *mockURLShortener) GetBaseURL(id string) (string, error) {
 	url, exists := m.storage[id]
 
 	if !exists {
 		return "", fmt.Errorf("url not found")
 	}
-	return url.BaseUrl, nil
+	return url.BaseURL, nil
 }
 
-func (m *mockUrlShortener) Shorten(url string) (string, error) {
+func (m *mockURLShortener) Shorten(url string) (string, error) {
 	id := "short-id"
 
 	m.storage[id] = entity.StorageEntity{
-		BaseUrl:    url,
-		ShortedUrl: "http://localhost:8080/" + id,
+		BaseURL:    url,
+		ShortedURL: "http://localhost:8080/" + id,
 	}
 	return id, nil
 }
 
 func newTestHandler() *Handler {
-	return NewHandler(&mockUrlShortener{map[string]entity.StorageEntity{}})
+	return NewHandler(&mockURLShortener{map[string]entity.StorageEntity{}})
 }
 
 func TestHandlerGet(t *testing.T) {
 	handler := newTestHandler()
 	url := "https://ya.ru"
 
-	handler.UrlShortener.(*mockUrlShortener).storage["short-id"] = entity.StorageEntity{BaseUrl: url}
+	handler.UrlShortener.(*mockURLShortener).storage["short-id"] = entity.StorageEntity{BaseURL: url}
 	req := httptest.NewRequest(http.MethodGet, "/short-id", nil)
 	w := httptest.NewRecorder()
 	handler.Handle(w, req)
