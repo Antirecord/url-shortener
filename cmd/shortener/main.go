@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/antirecord/url-shortener/internal/app/entity"
+	"github.com/antirecord/url-shortener/internal/app/handlers"
 	"github.com/antirecord/url-shortener/internal/app/service"
-	"github.com/antirecord/url-shortener/internal/handlers"
 )
 
 func main() {
