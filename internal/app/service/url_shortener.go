@@ -22,22 +22,22 @@ func (us SimpleURLShortener) Shorten(url string) (string, error) {
 
 	hash := GenerateHash(url)
 	fmt.Println("hash === ", hash)
-	newUrl := mergeHash(hash)
-	fmt.Println("newUrl ==== ", newUrl)
+	newURL := mergeHash(hash)
+	fmt.Println("newUrl ==== ", newURL)
 	entity := entity.StorageEntity{
 		BaseURL:    url,
-		ShortedURL: newUrl,
+		ShortedURL: newURL,
 	}
 
 	us.storage[hash] = entity
-	return newUrl, nil
+	return newURL, nil
 }
 
 func (us SimpleURLShortener) GetBaseURL(id string) (string, error) {
-	baseUrl, ok := us.storage[id]
+	baseURL, ok := us.storage[id]
 
 	if ok {
-		return baseUrl.BaseURL, nil
+		return baseURL.BaseURL, nil
 	}
 	return "", fmt.Errorf("url с таким id не найден")
 }
