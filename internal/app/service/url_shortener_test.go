@@ -92,7 +92,8 @@ func Test_mergeHash(t *testing.T) {
 		{
 			name: "first mergeHash test",
 			args: args{
-				hash: "123asd45",
+				hash:    "123asd45",
+				baseURL: "localhost:8080",
 			},
 			want: "http://localhost:8080/123asd45",
 		},
