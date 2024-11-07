@@ -46,5 +46,8 @@ func (us SimpleURLShortener) GetBaseURL(id string) (string, error) {
 }
 
 func mergeHash(hash, baseURL string) string {
+	if strings.HasPrefix(baseURL, "http://") || strings.HasPrefix(baseURL, "https://") {
+		return fmt.Sprintf("%s/%s", baseURL, hash)
+	}
 	return fmt.Sprintf("http://%s/%s", baseURL, hash)
 }
