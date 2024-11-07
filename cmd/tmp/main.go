@@ -1,28 +1,20 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-
-	"github.com/go-resty/resty/v2"
 )
 
-type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-}
-
 func main() {
-	client := resty.New()
-	users := []User{}
-	_, err := client.R().
-		SetResult(&users).
-		Get("https://jsonplaceholder.typicode.com/users")
+	imgFile := flag.String("file", "", "input image file")
+	destDir := flag.String("dest", "./output", "destination folder")
+	width := flag.Int("w", 1024, "width of the image")
+	isThumb := flag.Bool("thumb", false, "create thumb")
 
-	if err != nil {
-		fmt.Println("Error: ", err.Error())
-	}
-	for _, u := range users {
-		fmt.Print(u.Username, " ")
-	}
+	// разбор командной строки
+	flag.Parse()
+	fmt.Println("Image file:", *imgFile)
+	fmt.Println("Destination folder:", *destDir)
+	fmt.Println("Width:", *width)
+	fmt.Println("Thumbs:", *isThumb)
 }

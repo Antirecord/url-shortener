@@ -81,7 +81,8 @@ func TestSimpleUrlShortener_GetBaseURL(t *testing.T) {
 
 func Test_mergeHash(t *testing.T) {
 	type args struct {
-		hash string
+		hash    string
+		baseURL string
 	}
 	tests := []struct {
 		name string
@@ -98,7 +99,7 @@ func Test_mergeHash(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := mergeHash(tt.args.hash); got != tt.want {
+			if got := mergeHash(tt.args.hash, tt.args.baseURL); got != tt.want {
 				t.Errorf("mergeHash() = %v, want %v", got, tt.want)
 			}
 		})

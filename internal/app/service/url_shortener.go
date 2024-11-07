@@ -4,15 +4,17 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/antirecord/url-shortener/internal/app/config"
 	"github.com/antirecord/url-shortener/internal/app/entity"
 )
 
 type SimpleURLShortener struct {
+	Config  config.Config
 	storage map[string]entity.StorageEntity
 }
 
-func NewURLShortener(storage map[string]entity.StorageEntity) *SimpleURLShortener {
-	return &SimpleURLShortener{storage: storage}
+func NewURLShortener(storage map[string]entity.StorageEntity, config config.Config) *SimpleURLShortener {
+	return &SimpleURLShortener{storage: storage, Config: config}
 }
 
 func (us SimpleURLShortener) Shorten(url string) (string, error) {
@@ -23,7 +25,7 @@ func (us SimpleURLShortener) Shorten(url string) (string, error) {
 
 	hash := GenerateHash(url)
 	fmt.Println("hash === ", hash)
-	newURL := mergeHash(hash)
+	newURL := mergeHash(hash, us.Config.BaseURL)
 	fmt.Println("newUrl ==== ", newURL)
 	entity := entity.StorageEntity{
 		BaseURL:    url,
@@ -43,6 +45,6 @@ func (us SimpleURLShortener) GetBaseURL(id string) (string, error) {
 	return "", fmt.Errorf("url с таким id не найден")
 }
 
-func mergeHash(hash string) string {
-	return fmt.Sprintf("http://localhost:8080/%s", hash)
+func mergeHash(hash, baseURL string) string {
+	return fmt.Sprintf("http://%s/%s", baseURL, hash)
 }
